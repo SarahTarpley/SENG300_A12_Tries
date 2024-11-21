@@ -61,51 +61,10 @@ public class AutoComplete extends JFrame {
 		setBounds(100, 100, 1280, 720);
 		getContentPane().setLayout(new GridLayout(1, 1, 0, 0));
 		contentPane = new JPanel();
-//		contentPane.addComponentListener(new ComponentAdapter() {
-//		  	public void componentResized(ComponentEvent e)
-//		  	{
-//		  		//System.out.println("test");
-//		  		//System.out.println(resultPane.getSize());
-//			  	//resultTable.setPreferredScrollableViewportSize(resultPane.getSize());
-//				//resultTable.setPreferredScrollableViewportSize(getCustomDimensions(375));
-//				//resultPane.setPreferredSize(getCustomDimensions(375));
-////				resultPane.setBounds(getBounds());
-////				resultPane.setSize(getCustomDimensions(375));
-////				resultPane.getViewport().setSize(resultPane.getSize());
-////				resultTable.setSize(resultPane.getSize());
-////				resultTable.getColumn("Definition").setPreferredWidth((resultPane.getWidth() / 3) * 2);
-//		  		//resultPane.getHorizontalScrollBar().setLocation(contentPane.getWidth(), getLocation().y);
-//////				resultPane.getViewport().setBounds(new Rectangle(0, 0, contentPane.getSize().width, contentPane.getSize().height));
-//////				//resultPane.setBounds(new Rectangle(0, 0, resultPane.getSize().width, contentPane.getSize().height));
-//////				resultTable.setFillsViewportHeight(true);
-////				//spl_resultPane.getViewport().setSize(resultPane.getSize());
-////				//spl_resultPane.getViewport().revalidate();
-////				resultTable.getBaseline()
-////				resultPane.getViewport().revalidate();
-//			  	//resultTable.revalidate();
-////			  	resultTable.repaint();
-////			  	resultPane.getViewport().repaint();
-//			  	//resultPane.revalidate();
-////			  	resultPane.repaint();
-//			  	System.out.print("1-- ");
-//			  	System.out.println(resultTable.getHeight());
-//			  	System.out.print("2-- ");
-//		  		System.out.println(resultPane.getHeight());
-//			  	System.out.print("3-- ");
-//		  		System.out.println(resultPane.getViewport().getHeight());
-//			  	System.out.print("4-- ");
-//		  		System.out.println(spl_resultPane.getViewport().getHeight());
-//			  	System.out.print("5-- ");
-//			  	System.out.println(resultPane.getBounds().height);
-//
-//
-//		  	}	
-//		});
 		contentPane.setBounds(new Rectangle(0, 0, 1280, 720));
 		contentPane.setBackground(new Color(174, 178, 195));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		
 		contentPane.setEnabled(true);
 		contentPane.addKeyListener(new KeyAdapter() {
 			@Override
@@ -118,51 +77,30 @@ public class AutoComplete extends JFrame {
 		
 		// north panel
 		JPanel panel = new JPanel();
-//		{
-//		    @Override
-//		    public Dimension getMaximumSize(){
-//		        return getCustomDimensions(250);
-//		    }
-//		    @Override
-//		    public Dimension getMinimumSize(){
-//		        return getCustomDimensions(250);
-//		    }
-//		    @Override
-//		    public Dimension getPreferredSize(){
-//		        return getCustomDimensions(250);
-//		    }
-//		};
 		contentPane.add(panel);
-//		panel.setMinimumSize(new Dimension(1270, 300));
 		panel.setBounds(new Rectangle(5, 5, getContentPane().getBounds().width, 250));
 		panel.setPreferredSize(new Dimension(getContentPane().getBounds().width - 50, 250));
 		panel.setBackground(contentPane.getBackground());
 		
 		// search results
-//		resultTable = new JTable(resultDict);
 		resultPane.enableInputMethods(false);
 		resultPane.setBackground(new Color(255, 255, 255));
 		resultPane.setBounds(new Rectangle(20, 275, 1230, getCustomDimensions(375).height));
-		//Dimension prefSize = new Dimension(contentPane.getWidth()-50, contentPane.getHeight() - 345);
 		resultPane.setPreferredSize(getCustomDimensions(375));
 		resultTable.setAutoCreateColumnsFromModel(true);
 		resultTable.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
-		//resultTable.getColumn("Definition").setPreferredWidth((resultPane.getWidth() / 3) * 2);
+		resultTable.getColumn("Definition").setPreferredWidth((resultPane.getWidth() / 3) * 2);
 		resultTable.setFillsViewportHeight(true);
-		//resultTable.setIntercellSpacing(new Dimension(10, 5));
 		resultTable.setAutoCreateRowSorter(true);
-		//resultTable.setSize(new Dimension(1000, 300));
 		resultTable.setRowSelectionAllowed(false);
-		//resultTable.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		resultTable.setRowMargin(25);
 		resultTable.setRowHeight(100);
 		resultTable.setEnabled(false);
 		resultTable.setFont(new Font("Calibri", Font.PLAIN, 18));
-		//JScrollPane resultPane = new JScrollPane(resultTable);
 		resultPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		//resultTable.setPreferredSize(resultPane.getPreferredSize());
-		
 		contentPane.add(resultPane);
+		
+		// layout
 		SpringLayout spl = new SpringLayout();
 		contentPane.setLayout(spl);
 		//spl.putConstraint(SpringLayout.NORTH, panel, 0, SpringLayout.NORTH, contentPane);
@@ -174,10 +112,7 @@ public class AutoComplete extends JFrame {
 //		spl.putConstraint(SpringLayout.SOUTH, panel, 20, SpringLayout.NORTH, resultPane);
 //		spl.putConstraint(SpringLayout.SOUTH, resultTable, 0, SpringLayout.SOUTH, resultPane);
 //		spl.putConstraint(SpringLayout.EAST, resultTable, 0, SpringLayout.EAST, resultPane);
-		
-		//spl.putConstraint(SpringLayout.EAST, resultPane, 0, SpringLayout.EAST, contentPane);
-		//spl.putConstraint(SpringLayout.EAST, resultPane.getCorner(JScrollPane.UPPER_RIGHT_CORNER), 0, SpringLayout.EAST, resultPane);
-		
+
 		// search button
 		JButton btnSearch = new JButton("Search");
 		btnSearch.setForeground(new Color(255, 255, 255));
@@ -228,7 +163,7 @@ public class AutoComplete extends JFrame {
 		list.setVisibleRowCount(1);
 		list.setSize(new Dimension(1100, 50));
 		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-		list.setBounds(10, 160, panel.getWidth()-50, 35);
+		list.setBounds(20, 160, panel.getWidth()-50, 35);
 		list.setCellRenderer(new cellRender());
 		list.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -243,7 +178,7 @@ public class AutoComplete extends JFrame {
 		searchBar = new JTextField();
 		searchBar.setMargin(new Insets(5, 5, 5, 5));
 		searchBar.setFont(new Font("Calibri", Font.PLAIN, 14));
-		searchBar.setBounds(10, 200, 1100, 30);
+		searchBar.setBounds(20, 200, 1090, 30);
 		searchBar.setEnabled(true);
 		searchBar.grabFocus();
 		searchBar.addKeyListener(new KeyAdapter() {
@@ -291,6 +226,7 @@ public class AutoComplete extends JFrame {
 		searchBar.setColumns(40);
 		panel.add(searchBar);
 
+		// title bar
 		JTextPane txtpnAutocomplete = new JTextPane();
 		txtpnAutocomplete.setDisabledTextColor(new Color(255, 255, 255));
 		txtpnAutocomplete.setEnabled(false);
@@ -302,16 +238,24 @@ public class AutoComplete extends JFrame {
 		txtpnAutocomplete.setBounds(435, 20, 420, 60);
 		panel.add(txtpnAutocomplete);
 	}
+	
+	// method to clear out the default search tip when user interacts
 	public void initializeSearch(InputEvent e) {
 			searchBar.setText("");
 			searchBar.setEditable(true);
 			searchBar.setForeground(new Color(0, 0, 0));
 			isNewSearch = false;	
 	}
+	
+	// method to calculate size against main frame
     private Dimension getCustomDimensions(int height){
     		double ratio = height/720.0;
             return new Dimension((int)(super.getContentPane().getBounds().width - 50), (int) (getContentPane().getSize().height * ratio));
     }
+    
+    // custom settings for the autosearch suggestions list
+    // the list will be spaced with an empty item between each suggestion for visibility
+    // blank items are set to be non-interactable
 	class cellRender extends JLabel implements ListCellRenderer<Object>{
 
 		@Override
@@ -334,47 +278,4 @@ public class AutoComplete extends JFrame {
 		}
 		
 	}
-//	public class tablePane extends JScrollPane implements Scrollable{
-//		
-//		public tablePane(JTable resultTable) {
-//			super();
-//		}
-//		
-//		@Override
-//		public Dimension getPreferredSize() {
-//			// TODO Auto-generated method stub
-//			return getCustomDimensions(375);
-//		}
-//
-//		@Override
-//		public Dimension getPreferredScrollableViewportSize() {
-//			// TODO Auto-generated method stub
-//			return getCustomDimensions(375);
-//		}
-//
-//		@Override
-//		public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
-//			// TODO Auto-generated method stub
-//			return 0;
-//		}
-//
-//		@Override
-//		public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
-//			// TODO Auto-generated method stub
-//			return 0;
-//		}
-//
-//		@Override
-//		public boolean getScrollableTracksViewportWidth() {
-//			// TODO Auto-generated method stub
-//			return true;
-//		}
-//
-//		@Override
-//		public boolean getScrollableTracksViewportHeight() {
-//			// TODO Auto-generated method stub
-//			return true;
-//		}
-//		
-//	}
 }
